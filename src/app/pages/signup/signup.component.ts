@@ -13,10 +13,10 @@ export class SignupComponent implements OnInit {
   constructor(private userService: UserService, private snack: MatSnackBar) {}
 
   public user = {
-    userName: '',
+    username: '',
     password: '',
-    firstName: '',
-    lastName: '',
+    firstname: '',
+    lastname: '',
     email: '',
     phone: '',
   };
@@ -28,7 +28,7 @@ export class SignupComponent implements OnInit {
     //validation
     console.log(this.user);
 
-    if(this.user.userName == '' || this.user.userName == null){
+    if(this.user.username == '' || this.user.username == null){
       //alert('Username is required!!');
       this.snack.open('Username is required !!', '', {
         duration: 2000,
@@ -50,7 +50,7 @@ export class SignupComponent implements OnInit {
       (error) => {
         console.log(error);
         //alert('Error! Something went wrong!!');
-        this.snack.open('Something went wrong!', '', {
+        this.snack.open('Username already exist, try another one!', '', {
           duration: 2000,
         })
       }

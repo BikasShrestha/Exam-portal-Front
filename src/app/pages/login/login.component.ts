@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { Router } from '@angular/router';
 import { LoginService } from 'src/app/services/login.service';
 
 @Component({
@@ -13,7 +14,7 @@ export class LoginComponent implements OnInit {
     password: '',
   };
 
-  constructor(private snack: MatSnackBar, private login: LoginService) {}
+  constructor(private snack: MatSnackBar, private login: LoginService, private router: Router) {}
 
   ngOnInit(): void {}
 
@@ -58,9 +59,14 @@ export class LoginComponent implements OnInit {
 
             //redirect **ADMIN: admin-dashboard
             if(this.login.getUserRole() == 'ADMIN'){
-              window.location.href = '/admin';
+              this.router.navigate(['admin']);
+              this.login.loginStatusSubject.next(true);
+              //window.location.href = '/admin';
+
             } else if(this.login.getUserRole() == 'NORMAL'){
-              window.location.href = '/user-dashboard';
+              this.router.navigate(['user-dashboard']);
+              this.login.loginStatusSubject.next(true);
+              //window.location.href = '/user-dashboard';
             } else {
               this.login.logout();
             }
@@ -72,7 +78,7 @@ export class LoginComponent implements OnInit {
 
           },
           (error)=>{
-
+            
           }
 
 
@@ -86,6 +92,9 @@ export class LoginComponent implements OnInit {
       (error) => {
         console.log('Error !');
         console.log(error);
+        this.snack.open('Wrong Credentials!', '', {
+              duration: 2000,
+            });
       }
     );
   }
