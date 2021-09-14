@@ -74,6 +74,12 @@ export class LoginService {
     return user.authorities[0].authority;
   }
 
+
+  //get user firstname
+  public getFirstname(){
+    let user = this.getUser();
+    return user.firstname;
+  }
   
 
 }

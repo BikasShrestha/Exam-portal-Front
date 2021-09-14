@@ -1,2 +1,53 @@
-<h1>Your profile Details</h1>
- 
+<mat-card>
+  <!-- {{user | json}} -->
+  <h1>Your profile Details</h1>
+  <mat-card-content>
+    <div class="bootstrap-wrapper">
+      <div class="container">
+        <div class="container text-center">
+          <img
+            src="https://www.personality-insights.com/wp-content/uploads/2017/12/default-profile-pic-e1513291410505.jpg"
+            alt=""
+            class="profile-image"
+          />
+          <h1 class="mt20">
+            {{ login.getUser().firstname }} {{ login.getUser().lastname }}
+          </h1>
+        </div>
+
+        <div class="row">
+          <div class="col-md-10 offset-md-1">
+            <table class="table">
+              <tr>
+                <td>Username</td>
+                <!-- <td>{{user.username}} </td> -->
+                <td>{{ login.getUser().username }}</td>
+              </tr>
+              <tr>
+                <td>UserId</td>
+                <td>EXAM{{ login.getUser().id }}</td>
+              </tr>
+              <tr *ngIf="login.getUser().phone">
+                <td>Phone</td>
+                <td>{{ login.getUser().phone }}</td>
+              </tr>
+              <tr>
+                <td>Role</td>
+                <td>{{ login.getUser().authorities[0].authority }}</td>
+              </tr>
+              <tr>
+                <td>Status</td>
+                <td>{{ login.getUser().enabled ? "ACTIVE" : "NOTACTIVE" }}</td>
+              </tr>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </mat-card-content>
+
+  <mat-card-actions class="text-center">
+    <button mat-raised-button color="primary">UPDATE</button>
+    <button mat-raised-button color="warn">SHARE</button>
+  </mat-card-actions>
+</mat-card>
